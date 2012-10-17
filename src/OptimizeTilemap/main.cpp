@@ -81,7 +81,7 @@ void moveSelectionToOutputAtlases(Selection* selection, int atlasWidth, int atla
 	selection->y = currentAtlasY;
 	
 	currentAtlasX += selection->width;
-	if(currentAtlasX >= atlasWidth) {
+	if(currentAtlasX + selection->width > atlasWidth) {
 		currentAtlasX = 0;
 		currentAtlasY += selection->height;
 	}
@@ -226,7 +226,7 @@ int main(int argc, char **argv) {
 	
 	// write xml output
 	char outputXmlName[256];
-	sprintf(outputXmlName, "%s-tilemap.xml", outputPrefix.c_str());
+	sprintf(outputXmlName, "%s%s-tilemap.xml", path.c_str(), outputPrefix.c_str());
 
 	ofstream xml;
 	xml.open(outputXmlName);
@@ -287,7 +287,7 @@ int main(int argc, char **argv) {
 		
 		char atlasFilename[1024];
 		
-		sprintf(atlasFilename, "%s-%d.png", outputPrefix.c_str(), z);
+		sprintf(atlasFilename, "%s%s-%d.png", path.c_str(), outputPrefix.c_str(), z);
 		
 		printf("writing %s\n", atlasFilename);
 		
